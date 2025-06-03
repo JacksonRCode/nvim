@@ -8,6 +8,7 @@ return { -- Highlight, edit, and navigate code
       'lua',
       'python',
       'javascript',
+      'tsx',
       'typescript',
       'vimdoc',
       'vim',
