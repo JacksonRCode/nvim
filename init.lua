@@ -22,3 +22,6 @@ require('lazy').setup({
     require 'plugins.undotree',
 })
 
+require("nvim-treesitter.parsers").get_parser_configs().ejs = {
+  filetype = "html",
+}
