@@ -22,6 +22,11 @@ require('lazy').setup({
     require 'plugins.undotree',
 })
 
-require("nvim-treesitter.parsers").get_parser_configs().ejs = {
-  filetype = "html",
-}
+-- In init.lua
+vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+  pattern = "*.ejs",
+  callback = function()
+    vim.bo.filetype = "ejs"
+    vim.bo.syntax = "html" -- Fallback to html syntax with ejs support
+  end,
+})
