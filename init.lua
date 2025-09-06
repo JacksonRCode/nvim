@@ -20,6 +20,7 @@ require('lazy').setup({
     require 'plugins.lsp',
     require 'plugins.harpoon',
     require 'plugins.undotree',
+    require 'plugins.autocomplete',
 })
 
 -- In init.lua
