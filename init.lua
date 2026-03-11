@@ -24,6 +24,8 @@ require("lazy").setup({
 	require("plugins.autopairs"),
 	require("plugins.formatting"),
 	require("plugins.gitsigns"),
+	require("plugins.neotree"),
+	require("plugins.lualine"),
 })
 
 -- In init.lua
