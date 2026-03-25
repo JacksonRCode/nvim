@@ -41,3 +41,8 @@ vim.keymap.set("v", "<leader>d", '"_d')
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
+
+-- Bufferline
+vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>", { silent = true })
+vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>", { silent = true })
+vim.keymap.set("n", "<leader>x", ":bdelete<CR>", { silent = true })
