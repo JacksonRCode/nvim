@@ -46,3 +46,8 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>", { silent = true })
 vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>", { silent = true })
 vim.keymap.set("n", "<leader>x", ":bdelete<CR>", { silent = true })
+
+-- Toggle autocomplete
+vim.keymap.set("n", "<leader>ac", function()
+	require("blink.cmp").toggle()
+end, { desc = "Toggle Autocomplete" })

@@ -24,6 +24,7 @@ return {
 			cssls = {},
 			pyright = {},
 			sqlls = {},
+			intelephense = {},
 		}
 
 		-- 1. FORCE DIAGNOSTIC TEXT TO APPEAR
@@ -51,7 +52,9 @@ return {
 		-- Ensure servers listed above are automatically installed
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua", -- For formatting Lua code
+			"stylua",
+			"php-cs-fixer",
+			"sql-formatter",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
