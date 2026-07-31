@@ -5,11 +5,8 @@ vim.g.maplocalleader = " "
 -- Disable spacebars default behaviour
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
--- For conciseness
-local opts = { noremap = true, silent = true }
-
 -- File explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
 
 -- Move commands (move highlighted text up or down)
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -29,10 +26,14 @@ vim.keymap.set("n", "N", "Nzzzv")
 -- Paste over highlighted word without losing current copy buffer
 vim.keymap.set("x", "<leader>p", '"_dP')
 
--- Copy to system clipboard
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
+-- Copy to the system clipboard without replacing Neovim's internal yank.
+local clipboard = require("core.clipboard")
+vim.keymap.set("n", "<leader>y", clipboard.start_operator, {
+	expr = true,
+	desc = "Yank to system clipboard",
+})
+vim.keymap.set("x", "<leader>y", clipboard.visual, { desc = "Yank selection to system clipboard" })
+vim.keymap.set("n", "<leader>Y", clipboard.line, { desc = "Yank line to system clipboard" })
 
 -- Delete without copying
 vim.keymap.set("n", "<leader>d", '"_d')
@@ -42,12 +43,13 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "Q", "<nop>")
 
--- Bufferline
-vim.keymap.set("n", "L", ":BufferLineCycleNext<CR>", { silent = true })
-vim.keymap.set("n", "H", ":BufferLineCyclePrev<CR>", { silent = true })
-vim.keymap.set("n", "<leader>x", ":bdelete<CR>", { silent = true })
+vim.keymap.set("n", "<leader>x", "<cmd>bdelete<CR>", { silent = true, desc = "Delete buffer" })
 
 -- Toggle autocomplete
 vim.keymap.set("n", "<leader>ac", function()
-	require("blink.cmp").toggle()
+	vim.b.completion = vim.b.completion == false
+	if not vim.b.completion then
+		require("blink.cmp").cancel()
+	end
+	vim.notify("Autocomplete " .. (vim.b.completion and "enabled" or "disabled"))
 end, { desc = "Toggle Autocomplete" })
